@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=3 uid="uid://c6y0l1n1er6gg"]
+
+[ext_resource type="Texture2D" uid="uid://44t6qlyongg0" path="res://assets/rockingchaire.png" id="1_m8qhl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ne5g"]
+atlas = ExtResource("1_m8qhl")
+region = Rect2(0, 0, 74, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6nhl"]
+atlas = ExtResource("1_m8qhl")
+region = Rect2(74, 0, 74, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whpfo"]
+atlas = ExtResource("1_m8qhl")
+region = Rect2(148, 0, 74, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pee1"]
+atlas = ExtResource("1_m8qhl")
+region = Rect2(222, 0, 74, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bp87"]
+atlas = ExtResource("1_m8qhl")
+region = Rect2(296, 0, 74, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0vpt"]
+atlas = ExtResource("1_m8qhl")
+region = Rect2(370, 0, 74, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07r3u"]
+atlas = ExtResource("1_m8qhl")
+region = Rect2(444, 0, 74, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytqi1"]
+atlas = ExtResource("1_m8qhl")
+region = Rect2(518, 0, 74, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8we23"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ne5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6nhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whpfo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pee1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bp87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0vpt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07r3u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytqi1")
+}],
+"loop": true,
+"name": &"rockingchaire",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m8qhl"]
+size = Vector2(64, 35)
+
+[node name="Rockingchaire" type="StaticBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.1, 1.1)
+sprite_frames = SubResource("SpriteFrames_8we23")
+animation = &"rockingchaire"
+autoplay = "rockingchaire"
+frame_progress = 0.45295468
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -0.5)
+shape = SubResource("RectangleShape2D_m8qhl")

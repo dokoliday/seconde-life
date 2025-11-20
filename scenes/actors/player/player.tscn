@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://b5b0gwy6fdmkq"]
+[gd_scene load_steps=24 format=3 uid="uid://b5b0gwy6fdmkq"]
 
 [ext_resource type="Script" uid="uid://d2w8nb3pd5rf2" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://fl4jcbjb5m3b" path="res://assets/automn_stationary.png" id="2_dqkch"]
 [ext_resource type="Texture2D" uid="uid://cjvpmlne2nmo4" path="res://assets/spring_stationary.png" id="2_qhqgy"]
 [ext_resource type="Texture2D" uid="uid://cy1g73gkd261m" path="res://assets/spring_walk.png" id="3_dqkch"]
+[ext_resource type="PackedScene" uid="uid://c0s27ipr84dfn" path="res://scenes/UI/dialog.tscn" id="5_qlg0r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a8ls1"]
 atlas = ExtResource("2_dqkch")
@@ -136,9 +137,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vyb7"]
-size = Vector2(22, 12)
+size = Vector2(17, 10)
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(2, 2)
 script = ExtResource("1_g2els")
 metadata/_edit_group_ = true
 
@@ -148,11 +150,19 @@ animation = &"walk"
 autoplay = "stationary"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 26)
 shape = SubResource("RectangleShape2D_3vyb7")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.1, 1.1)
 process_callback = 0
-limit_left = -550
-limit_top = 0
-limit_right = 3100
-limit_bottom = 900
+limit_left = -253
+limit_top = -105
+limit_right = 1447
+limit_bottom = 795
+
+[node name="Dialogs" parent="." instance=ExtResource("5_qlg0r")]
+
+[connection signal="dialog_end" from="Dialogs" to="." method="_on_dialogs_dialog_end"]
+[connection signal="dialog_started" from="Dialogs" to="." method="_on_dialogs_dialog_started"]
+[connection signal="dialog_started" from="Dialogs" to="." method="_on_dialog_started"]

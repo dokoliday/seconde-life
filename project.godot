@@ -13,12 +13,14 @@ config_version=5
 config/name="SecondeLife"
 run/main_scene="uid://bwrt414m7nst2"
 config/features=PackedStringArray("4.5", "Forward Plus")
+run/canvas_textures/default_texture_filter=0
 
 [display]
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
 window/stretch/mode="canvas_items"
+window/main_scene="uid://crwqsjgbnfqe5"
 
 [input]
 

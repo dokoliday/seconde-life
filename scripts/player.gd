@@ -1,17 +1,25 @@
-extends Area2D
+extends CharacterBody2D
 
 @onready var player_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
-@export var speed = 100 # How fast the player will move (pixels/sec).
+@export var speed = 200 # How fast the player will move (pixels/sec).
 var screen_size # Size of the game window.
+var player_blocked:bool =  false
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	
-	
 
 func _process(delta):
-	var velocity = Vector2.ZERO # The player's movement vector.
+	var velocity = Vector2.ZERO
+	
+	move_and_slide()# The player's movement vector.
+	
+	if player_blocked:
+		player_sprite.animation = "stationary"
+		player_sprite.play()
+		return
+		
 	if Input.is_action_pressed("walk_right"):
 		velocity.x += 1
 	if Input.is_action_pressed("walk_left"):
@@ -25,7 +33,7 @@ func _process(delta):
 		velocity = velocity.normalized() * speed
 	
 	position += velocity * delta
-	position = position.clamp(Vector2.ZERO, screen_size)
+	position = position.clamp(Vector2.ZERO, Vector2(screen_size.x+400,screen_size.y))
 	
 	if velocity.x == 0 :
 		player_sprite.animation = "stationary"
@@ -33,8 +41,12 @@ func _process(delta):
 	if velocity.x != 0:
 		player_sprite.animation = "walk"
 		player_sprite.flip_h = velocity.x < 0
-	player_sprite.scale = Vector2(position.y/400,position.y/400)
 	
-	
-		
 	player_sprite.play()
+	
+func _on_dialogs_dialog_end() -> void:
+	player_blocked = false
+
+
+func _on_dialogs_dialog_started() -> void:
+	player_blocked = true

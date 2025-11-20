@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baov8b6x0ymp6"
-path="res://.godot/imported/anim_rockingchaire.png-6cb542c60189b385b024f2d2bf7719d4.ctex"
+uid="uid://bbm37epbub6qx"
+path="res://.godot/imported/cat-Sheet.png-fc032f617d78be626fa48fb43956df7b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/anim_rockingchaire.png"
-dest_files=["res://.godot/imported/anim_rockingchaire.png-6cb542c60189b385b024f2d2bf7719d4.ctex"]
+source_file="res://assets/cat-Sheet.png"
+dest_files=["res://.godot/imported/cat-Sheet.png-fc032f617d78be626fa48fb43956df7b.ctex"]
 
 [params]
 
