@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://d2twpf88cmbf6"]
+
+[ext_resource type="Texture2D" uid="uid://b53w44cb3j6c7" path="res://assets/doort.png" id="1_yar34"]
+[ext_resource type="Script" uid="uid://ccupdtgdcuivm" path="res://scripts/door.gd" id="2_uw3m6"]
+[ext_resource type="Texture2D" uid="uid://cvja8ilpilynr" path="res://assets/action_icon-Sheet.png" id="3_xm0wp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uw3m6"]
+atlas = ExtResource("1_yar34")
+region = Rect2(0, 0, 96, 113)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xm0wp"]
+atlas = ExtResource("1_yar34")
+region = Rect2(96, 0, 96, 113)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aji8h"]
+atlas = ExtResource("1_yar34")
+region = Rect2(192, 0, 96, 113)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w0irj"]
+atlas = ExtResource("1_yar34")
+region = Rect2(288, 0, 96, 113)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vedx6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uw3m6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xm0wp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aji8h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w0irj")
+}],
+"loop": false,
+"name": &"open",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hfw7n"]
+radius = 78.00641
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vedx6"]
+atlas = ExtResource("3_xm0wp")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfw7n"]
+atlas = ExtResource("3_xm0wp")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ymeik"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vedx6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfw7n")
+}],
+"loop": true,
+"name": &"blink",
+"speed": 2.0
+}]
+
+[node name="Door" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_vedx6")
+animation = &"open"
+script = ExtResource("2_uw3m6")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_hfw7n")
+
+[node name="action_icon" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(3, -45.000004)
+scale = Vector2(1.3437499, 1.21875)
+sprite_frames = SubResource("SpriteFrames_ymeik")
+animation = &"blink"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

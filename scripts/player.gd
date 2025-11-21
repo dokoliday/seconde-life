@@ -16,7 +16,7 @@ func _process(delta):
 	move_and_slide()# The player's movement vector.
 	
 	if player_blocked:
-		player_sprite.animation = "stationary"
+		player_sprite.animation = "stationary_spring"
 		player_sprite.play()
 		return
 		
@@ -35,18 +35,21 @@ func _process(delta):
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, Vector2(screen_size.x+400,screen_size.y))
 	
-	if velocity.x == 0 :
-		player_sprite.animation = "stationary"
-		
-	if velocity.x != 0:
-		player_sprite.animation = "walk"
+		# Gestion des animations (priorité : vertical > horizontal > stationnaire)
+	if velocity.y < 0:
+		player_sprite.animation = "walk_up_spring"
+	elif velocity.y > 0:
+		player_sprite.animation = "walk_down_spring"
+	elif velocity.x != 0:
+		player_sprite.animation = "walk_right_spring"
 		player_sprite.flip_h = velocity.x < 0
-	
+	else:
+		player_sprite.animation = "stationary_spring"
+		
 	player_sprite.play()
 	
 func _on_dialogs_dialog_end() -> void:
 	player_blocked = false
-
 
 func _on_dialogs_dialog_started() -> void:
 	player_blocked = true

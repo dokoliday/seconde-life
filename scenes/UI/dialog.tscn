@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0s27ipr84dfn"]
+[gd_scene load_steps=4 format=3 uid="uid://c0s27ipr84dfn"]
 
 [ext_resource type="Script" uid="uid://bjocwr377j8ab" path="res://scripts/dialog.gd" id="1_335x5"]
 
@@ -19,8 +19,6 @@ spacing_glyph = 2
 spacing_space = 3
 spacing_top = 9
 spacing_bottom = 2
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_36pgd"]
 
 [node name="Dialogs" type="CanvasLayer"]
 offset = Vector2(1, 0)
@@ -60,16 +58,11 @@ offset_bottom = 857.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="Next_dialog" type="Button" parent="."]
-anchors_preset = -1
-anchor_right = 0.039
-anchor_bottom = 0.060000002
-offset_left = 1215.0
-offset_top = 815.0
-offset_right = 1214.6
-offset_bottom = 797.0
-text = "next
-"
-icon = SubResource("CanvasTexture_36pgd")
+[node name="Button" type="Button" parent="."]
+offset_left = 1242.0
+offset_top = 825.0
+offset_right = 1280.0
+offset_bottom = 858.0
+text = "=>"
 
-[connection signal="pressed" from="Next_dialog" to="." method="_on_next_dialog_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

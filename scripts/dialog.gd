@@ -2,8 +2,8 @@ extends CanvasLayer
 
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var rich_text_label: RichTextLabel = $RichTextLabel
-@onready var next_dialog: Button = $Next_dialog
 @onready var dialogs: CanvasLayer = $"."
+@onready var button: Button = $Button
 
 const DIALOG_MUM_SPRING = preload("uid://dhlk6fryj6snp")
 
@@ -18,16 +18,13 @@ func _ready() -> void:
 	load_dialogs()
 	setImage()
 	afficher_dialogue()
-	
-	# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+
 
 func setImage() -> void:
 	texture_rect.texture = DIALOG_MUM_SPRING
 
 func load_dialogs() -> void:
-	var file = FileAccess.open("res://dialogs.json", FileAccess.READ)
+	var file = FileAccess.open("res://Json/dialogs.json", FileAccess.READ)
 	if file:
 		var json = JSON.new()
 		var res = json.parse(file.get_as_text())
@@ -45,12 +42,12 @@ func afficher_dialogue() -> void:
 	else:
 		print("Erreur : La clé 'dialog_spring' n'existe pas dans le JSON.")
 		
-func _on_next_dialog_pressed() -> void:
+func _on_button_pressed() -> void:
 	index += 1
 	if index < DIALOGS["dialog_spring"].size():
 		afficher_dialogue()
 	else:
 		dialogs.hide()
 		dialog_end.emit()
-		next_dialog.disabled = true
+		button.disabled = true
 	
