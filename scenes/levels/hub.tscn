@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://dk8xsbyacfmyj"]
+
+[ext_resource type="Script" uid="uid://bsc3rjixh7tdt" path="res://scripts/hub.gd" id="1_3vq6u"]
+[ext_resource type="PackedScene" uid="uid://b5b0gwy6fdmkq" path="res://scenes/actors/player/player.tscn" id="2_b0i68"]
+[ext_resource type="Texture2D" path="res://assets/hub_sheet.png" id="2_bsb6g"]
+[ext_resource type="PackedScene" uid="uid://bscnao1jb0jgj" path="res://scenes/objects/hub_doors.tscn" id="4_bsb6g"]
+
+[sub_resource type="Animation" id="Animation_bsb6g"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.16666667, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.99607843)]
+}
+
+[sub_resource type="Animation" id="Animation_381ln"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_erssn"]
+_data = {
+&"RESET": SubResource("Animation_381ln"),
+&"fade_out": SubResource("Animation_bsb6g")
+}
+
+[node name="Hub" type="Node2D"]
+script = ExtResource("1_3vq6u")
+metadata/_edit_horizontal_guides_ = [867.0, 53.0]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_erssn")
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(148, 867, 265, 866, 262, 637, 257, 631, 316, 526, 1402, 527, 1400, 133, 1394, 135, 1391, 129, 721, 129, 723, 135, 714, 137, 712, 430, 719, 436, 717, 447, 710, 449, 706, 444, 154, 445, 150, 448, 146, 450, 147, 864, 141, 864, 138, 435, 705, 435, 706, 119, 1411, 120, 1410, 533, 320, 534, 270, 634, 270, 875, 146, 876)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(800, 446)
+texture = ExtResource("2_bsb6g")
+
+[node name="OrangeDoor" parent="." instance=ExtResource("4_bsb6g")]
+position = Vector2(1420, 185)
+
+[node name="BlueDoor" parent="." instance=ExtResource("4_bsb6g")]
+position = Vector2(1420, 371)
+
+[node name="GreenDoor" parent="." instance=ExtResource("4_bsb6g")]
+position = Vector2(121, 481)
+
+[node name="YellowDoor" parent="." instance=ExtResource("4_bsb6g")]
+position = Vector2(690, 188)
+
+[node name="Player" parent="." instance=ExtResource("2_b0i68")]
+position = Vector2(211, 847)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -14.0
+offset_top = -16.0
+offset_right = 1617.0
+offset_bottom = 922.0
+color = Color(0, 0, 0, 0)
+
+[connection signal="open_hub_door" from="OrangeDoor" to="." method="_on_orange_door_open_hub_door"]
+[connection signal="open_hub_door" from="BlueDoor" to="." method="_on_blue_door_open_hub_door"]
+[connection signal="open_hub_door" from="GreenDoor" to="." method="_on_green_door_open_hub_door"]
+[connection signal="open_hub_door" from="YellowDoor" to="." method="_on_yellow_door_open_hub_door"]

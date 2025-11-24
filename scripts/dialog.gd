@@ -13,7 +13,7 @@ var index = 0  # Commence à 0 pour accéder au premier élément
 signal dialog_started
 signal dialog_end
 
-func _ready() -> void:
+func display_dialog() -> void:
 	dialog_started.emit()
 	load_dialogs()
 	setImage()

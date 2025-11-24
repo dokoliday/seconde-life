@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwrt414m7nst2"]
+[gd_scene load_steps=9 format=3 uid="uid://bwrt414m7nst2"]
 
 [ext_resource type="PackedScene" uid="uid://c6y0l1n1er6gg" path="res://scenes/actors/npc/rockingchaire.tscn" id="2_5lkg1"]
 [ext_resource type="PackedScene" uid="uid://djogp3t43eoso" path="res://scenes/objects/house.tscn" id="3_62i7c"]
@@ -6,28 +6,78 @@
 [ext_resource type="PackedScene" uid="uid://b5b0gwy6fdmkq" path="res://scenes/actors/player/player.tscn" id="5_n2mu8"]
 [ext_resource type="PackedScene" uid="uid://d2twpf88cmbf6" path="res://scenes/objects/door.tscn" id="6_5lkg1"]
 
-[node name="Spring" type="Node"]
+[sub_resource type="Animation" id="Animation_bsb6g"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.16666667, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.99607843)]
+}
 
-[node name="Node2" type="Node" parent="."]
+[sub_resource type="Animation" id="Animation_381ln"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
 
-[node name="Rockingchaire" parent="Node2" instance=ExtResource("2_5lkg1")]
-z_index = 1
-position = Vector2(593.0002, 608)
-scale = Vector2(1.4, 1.4)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_erssn"]
+_data = {
+&"RESET": SubResource("Animation_381ln"),
+&"fade_out": SubResource("Animation_bsb6g")
+}
 
-[node name="House" parent="Node2" instance=ExtResource("3_62i7c")]
-position = Vector2(735, 422)
+[node name="Spring" type="Node2D"]
+y_sort_enabled = true
 
-[node name="Door" parent="Node2" instance=ExtResource("6_5lkg1")]
-position = Vector2(737.75, 524.25)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_erssn")
+}
+
+[node name="House" parent="." instance=ExtResource("3_62i7c")]
+y_sort_enabled = true
+position = Vector2(857, 609)
+
+[node name="Door" parent="House" instance=ExtResource("6_5lkg1")]
+position = Vector2(-128, -74)
 scale = Vector2(1.401042, 1.4469019)
 
-[node name="AnimatedSprite2D" parent="Node2" instance=ExtResource("4_vu3xo")]
-position = Vector2(925.00006, 597)
-scale = Vector2(0.7, 0.7)
+[node name="Rockingchaire" parent="." instance=ExtResource("2_5lkg1")]
+y_sort_enabled = true
+position = Vector2(632.00006, 630.00006)
+scale = Vector2(1.4, 1.4)
 
-[node name="Player" parent="Node2" instance=ExtResource("5_n2mu8")]
-z_index = 1
+[node name="Player" parent="." instance=ExtResource("5_n2mu8")]
 y_sort_enabled = true
 position = Vector2(625, 698)
-scale = Vector2(1.2, 1.2)
+
+[node name="Cat" parent="." instance=ExtResource("4_vu3xo")]
+y_sort_enabled = true
+position = Vector2(924, 597)
+scale = Vector2(0.7, 0.7)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 5
+offset_left = -14.0
+offset_top = -16.0
+offset_right = 1617.0
+offset_bottom = 922.0
+color = Color(0, 0, 0, 0)
+
+[connection signal="animation_finished" from="AnimationPlayer" to="House/Door" method="_on_animation_player_animation_finished"]

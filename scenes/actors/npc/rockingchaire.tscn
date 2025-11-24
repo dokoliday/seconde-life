@@ -72,6 +72,7 @@ size = Vector2(64, 35)
 [node name="Rockingchaire" type="StaticBody2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-37, -35)
 scale = Vector2(1.1, 1.1)
 sprite_frames = SubResource("SpriteFrames_8we23")
 animation = &"rockingchaire"
@@ -79,5 +80,5 @@ autoplay = "rockingchaire"
 frame_progress = 0.45295468
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, -0.5)
+position = Vector2(-33, -18)
 shape = SubResource("RectangleShape2D_m8qhl")

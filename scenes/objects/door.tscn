@@ -41,7 +41,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hfw7n"]
-radius = 78.00641
+radius = 37.48333
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vedx6"]
 atlas = ExtResource("3_xm0wp")
@@ -71,8 +71,10 @@ animation = &"open"
 script = ExtResource("2_uw3m6")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-45, -33)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(46, 75)
 shape = SubResource("CircleShape2D_hfw7n")
 
 [node name="action_icon" type="AnimatedSprite2D" parent="."]
