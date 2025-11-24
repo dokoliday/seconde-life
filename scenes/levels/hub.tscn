@@ -2,23 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bsc3rjixh7tdt" path="res://scripts/hub.gd" id="1_3vq6u"]
 [ext_resource type="PackedScene" uid="uid://b5b0gwy6fdmkq" path="res://scenes/actors/player/player.tscn" id="2_b0i68"]
-[ext_resource type="Texture2D" path="res://assets/hub_sheet.png" id="2_bsb6g"]
+[ext_resource type="Texture2D" uid="uid://bw4kqdv8y7yyp" path="res://assets/hub_sheet.png" id="2_bsb6g"]
 [ext_resource type="PackedScene" uid="uid://bscnao1jb0jgj" path="res://scenes/objects/hub_doors.tscn" id="4_bsb6g"]
-
-[sub_resource type="Animation" id="Animation_bsb6g"]
-resource_name = "fade_out"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(-0.16666667, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.99607843)]
-}
 
 [sub_resource type="Animation" id="Animation_381ln"]
 length = 0.001
@@ -33,6 +18,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bsb6g"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.16666667, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0.99607843)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_erssn"]
@@ -81,6 +81,7 @@ offset_right = 1617.0
 offset_bottom = 922.0
 color = Color(0, 0, 0, 0)
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="open_hub_door" from="OrangeDoor" to="." method="_on_orange_door_open_hub_door"]
 [connection signal="open_hub_door" from="BlueDoor" to="." method="_on_blue_door_open_hub_door"]
 [connection signal="open_hub_door" from="GreenDoor" to="." method="_on_green_door_open_hub_door"]

@@ -4,11 +4,16 @@ extends CharacterBody2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 @export var speed = 200
+
 var screen_size
 var player_blocked:bool =  false
+var current_level_name:String = "spring"
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	if get_tree().current_scene.name != 'Hub':
+		current_level_name = get_tree().current_scene.name
+		print(current_level_name)
 
 func _process(delta):
 	var velocity = Vector2.ZERO
@@ -16,7 +21,7 @@ func _process(delta):
 	move_and_slide()
 	
 	if player_blocked:
-		player_sprite.animation = "stationary_front_spring"
+		player_sprite.animation = "stationary_front_" + current_level_name.to_lower()
 		player_sprite.play()
 		return
 		
@@ -36,17 +41,17 @@ func _process(delta):
 	position = position.clamp(Vector2.ZERO, Vector2(screen_size.x+400,screen_size.y))
 	
 	if velocity.x != 0:
-		player_sprite.animation = "walk_right_spring"
+		player_sprite.animation = "walk_right_" + current_level_name.to_lower()
 		player_sprite.flip_h = velocity.x < 0
 	elif velocity.y < 0:
-		player_sprite.animation = "walk_up_spring"
+		player_sprite.animation = "walk_up_" + current_level_name.to_lower()
 	elif velocity.y > 0:
-		player_sprite.animation = "walk_down_spring"
+		player_sprite.animation = "walk_down_" + current_level_name.to_lower()
 	else:
-		if player_sprite.animation == "walk_up_spring" or player_sprite.animation == "stationary_back_spring" : 
-			player_sprite.animation = "stationary_back_spring"
+		if player_sprite.animation == "walk_up_" + current_level_name.to_lower() or player_sprite.animation == "stationary_back_" + current_level_name.to_lower() : 
+			player_sprite.animation = "stationary_back_" + current_level_name.to_lower()
 		else:
-			player_sprite.animation = "stationary_front_spring"
+			player_sprite.animation = "stationary_front_" + current_level_name.to_lower()
 		
 	player_sprite.play()
 	

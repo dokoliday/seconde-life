@@ -1,8 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://du1s3utcrxoy8"]
+[gd_scene load_steps=5 format=3 uid="uid://du1s3utcrxoy8"]
 
 [ext_resource type="PackedScene" uid="uid://b5b0gwy6fdmkq" path="res://scenes/actors/player/player.tscn" id="1_d66ub"]
+[ext_resource type="Script" uid="uid://0h65c7tray8y" path="res://scripts/winter.gd" id="1_ywv5w"]
+[ext_resource type="Texture2D" uid="uid://duwg0bwqfnj1o" path="res://assets/house.png" id="2_36w1f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ywv5w"]
+size = Vector2(259, 166.75)
 
 [node name="Winter" type="Node2D"]
+script = ExtResource("1_ywv5w")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(928, 425)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_36w1f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(920.5, 459.375)
+shape = SubResource("RectangleShape2D_ywv5w")
 
 [node name="Player" parent="." instance=ExtResource("1_d66ub")]
-position = Vector2(822, 652)
+position = Vector2(946, 559)

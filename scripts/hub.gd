@@ -6,6 +6,8 @@ extends Node2D
 @onready var yellow_door: AnimatedSprite2D = $YellowDoor/Area2D/AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+var door_opened : String
+
 func setup_door(door: AnimatedSprite2D, animation_name: String) -> void:
 	door.play(animation_name)
 	door.stop()
@@ -26,12 +28,15 @@ func _ready() -> void:
 func _on_orange_door_open_hub_door(inArea:bool) -> void:
 	if inArea:
 		orange_door.play("open_orange")
+		door_opened='orange'
 		animation_player.play("fade_out")
 	else:
 		orange_door.play("close_orange")
 func _on_blue_door_open_hub_door(inArea:bool) -> void:
 	if inArea:
 		blue_door.play("open_blue")
+		door_opened='blue'
+		animation_player.play("fade_out")
 	else:
 		blue_door.play("close_blue")
 func _on_green_door_open_hub_door(inArea:bool) -> void:
@@ -48,6 +53,10 @@ func _on_yellow_door_open_hub_door(inArea:bool) -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fade_out":
-		get_tree().change_scene_to_file("res://scenes/levels/spring.tscn")
+		match door_opened:
+			'orange':
+				get_tree().change_scene_to_file("res://scenes/levels/spring.tscn")
+			'blue':
+				get_tree().change_scene_to_file("res://scenes/levels/winter.tscn")
 		
 		
