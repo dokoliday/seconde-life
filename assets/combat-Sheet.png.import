@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8figji66hdun"
-path="res://.godot/imported/dialog_mum_spring.png-65805653f1159e6d12b54066391a1cb9.ctex"
+uid="uid://bu6jdd2w3udin"
+path="res://.godot/imported/combat-Sheet.png-04ceddcc80b5e3a500449fa4aefe2f15.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/dialog_mum_spring.png"
-dest_files=["res://.godot/imported/dialog_mum_spring.png-65805653f1159e6d12b54066391a1cb9.ctex"]
+source_file="res://assets/combat-Sheet.png"
+dest_files=["res://.godot/imported/combat-Sheet.png-04ceddcc80b5e3a500449fa4aefe2f15.ctex"]
 
 [params]
 

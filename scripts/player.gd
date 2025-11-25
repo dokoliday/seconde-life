@@ -13,7 +13,6 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	if get_tree().current_scene.name != 'Hub':
 		current_level_name = get_tree().current_scene.name
-		print(current_level_name)
 
 func _process(delta):
 	var velocity = Vector2.ZERO

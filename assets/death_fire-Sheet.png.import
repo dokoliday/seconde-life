@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8figji66hdun"
-path="res://.godot/imported/dialog_mum_spring.png-65805653f1159e6d12b54066391a1cb9.ctex"
+uid="uid://c3ejqvcxuhwtq"
+path="res://.godot/imported/death_fire-Sheet.png-e5ab8b1dd857ae8d03d4a256a4123961.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/dialog_mum_spring.png"
-dest_files=["res://.godot/imported/dialog_mum_spring.png-65805653f1159e6d12b54066391a1cb9.ctex"]
+source_file="res://assets/death_fire-Sheet.png"
+dest_files=["res://.godot/imported/death_fire-Sheet.png-e5ab8b1dd857ae8d03d4a256a4123961.ctex"]
 
 [params]
 
