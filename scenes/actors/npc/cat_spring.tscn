@@ -73,8 +73,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vpwfh"]
-radius = 30.413813
+[sub_resource type="CircleShape2D" id="CircleShape2D_uod34"]
+radius = 20.396078
 
 [node name="Cat" type="StaticBody2D"]
 
@@ -83,5 +83,5 @@ sprite_frames = SubResource("SpriteFrames_dyyhf")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-14, 1)
-shape = SubResource("CircleShape2D_vpwfh")
+position = Vector2(-9, 14)
+shape = SubResource("CircleShape2D_uod34")

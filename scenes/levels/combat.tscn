@@ -1,0 +1,238 @@
+[gd_scene load_steps=27 format=3 uid="uid://4ligsl7htqs2"]
+
+[ext_resource type="Script" uid="uid://dkuhspm1pjnod" path="res://scripts/combat.gd" id="1_f8fhw"]
+[ext_resource type="Texture2D" uid="uid://bu6jdd2w3udin" path="res://assets/combat-Sheet.png" id="2_f8fhw"]
+[ext_resource type="Texture2D" uid="uid://c3ejqvcxuhwtq" path="res://assets/death_fire-Sheet.png" id="2_raufl"]
+[ext_resource type="Texture2D" uid="uid://drgffbwfqaocj" path="res://assets/death-Sheet.png" id="3_raufl"]
+[ext_resource type="Texture2D" uid="uid://drfnhuj73k3s4" path="res://assets/life_barre_emptyl.png" id="5_sj3cb"]
+[ext_resource type="Texture2D" uid="uid://c1w3uhgt32lck" path="res://assets/life_barre_border.png" id="6_vk51m"]
+[ext_resource type="Texture2D" uid="uid://bdc4gv4akd4r3" path="res://assets/life_barre_full.png" id="7_lxv1m"]
+[ext_resource type="Texture2D" uid="uid://ptth7epl3gum" path="res://assets/death_life_empty.png" id="8_88l8t"]
+[ext_resource type="Texture2D" uid="uid://dgrqswq2fn336" path="res://assets/death_life_border.png" id="9_o67b6"]
+[ext_resource type="Texture2D" uid="uid://chqnc2fw6pwbg" path="res://assets/death_life_full.png" id="10_tvnl7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vk51m"]
+atlas = ExtResource("2_raufl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o67b6"]
+atlas = ExtResource("2_raufl")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvnl7"]
+atlas = ExtResource("2_raufl")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgft0"]
+atlas = ExtResource("2_raufl")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vuvxn"]
+atlas = ExtResource("2_raufl")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1ghl"]
+atlas = ExtResource("2_raufl")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4ml6"]
+atlas = ExtResource("2_raufl")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3uoq"]
+atlas = ExtResource("2_raufl")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jy67q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vk51m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o67b6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvnl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mgft0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vuvxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y1ghl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4ml6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3uoq")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_raufl"]
+atlas = ExtResource("3_raufl")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxv1m"]
+atlas = ExtResource("3_raufl")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o67b6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_raufl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxv1m")
+}],
+"loop": true,
+"name": &"combat",
+"speed": 3.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vciv"]
+atlas = ExtResource("2_f8fhw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxrlt"]
+atlas = ExtResource("2_f8fhw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj3cb"]
+atlas = ExtResource("2_f8fhw")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vk51m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vciv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxrlt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sj3cb")
+}],
+"loop": true,
+"name": &"combat",
+"speed": 3.0
+}]
+
+[node name="Combat" type="Node2D"]
+script = ExtResource("1_f8fhw")
+
+[node name="Ennemy" type="Node2D" parent="."]
+
+[node name="Fire" type="AnimatedSprite2D" parent="Ennemy"]
+modulate = Color(1, 1, 1, 0.44705883)
+position = Vector2(1310, 417)
+scale = Vector2(11.40625, 11.6875)
+sprite_frames = SubResource("SpriteFrames_jy67q")
+animation = &"fire"
+autoplay = "fire"
+
+[node name="Death" type="AnimatedSprite2D" parent="Ennemy"]
+position = Vector2(1301, 478)
+scale = Vector2(7.875, 5.7968764)
+sprite_frames = SubResource("SpriteFrames_o67b6")
+animation = &"combat"
+autoplay = "combat"
+
+[node name="Player" type="AnimatedSprite2D" parent="."]
+position = Vector2(350, 508.00006)
+scale = Vector2(4.1093745, 3.675781)
+sprite_frames = SubResource("SpriteFrames_vk51m")
+animation = &"combat"
+autoplay = "combat"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(800, 450)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LifeBoard" type="Panel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_right = 0.013
+offset_left = 18.0
+offset_right = 1554.85
+offset_bottom = 157.0
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayerLife" type="TextureProgressBar" parent="CanvasLayer/LifeBoard"]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 11.0
+offset_right = 543.3334
+offset_bottom = 89.5
+scale = Vector2(2, 2)
+texture_under = ExtResource("5_sj3cb")
+texture_over = ExtResource("6_vk51m")
+texture_progress = ExtResource("7_lxv1m")
+
+[node name="DeathLife" type="TextureProgressBar" parent="CanvasLayer/LifeBoard"]
+layout_mode = 0
+offset_left = 1296.0
+offset_top = 150.0
+offset_right = 1546.0
+offset_bottom = 220.50009
+rotation = -3.1415927
+scale = Vector2(2, 2)
+texture_under = ExtResource("8_88l8t")
+texture_over = ExtResource("9_o67b6")
+texture_progress = ExtResource("10_tvnl7")
+
+[node name="ActionBoard" type="Panel" parent="CanvasLayer"]
+offset_left = 36.0
+offset_top = 726.0
+offset_right = 1576.0
+offset_bottom = 896.0
+
+[node name="EscapeButton" type="Button" parent="CanvasLayer/ActionBoard"]
+layout_mode = 0
+offset_left = 1342.0
+offset_top = 26.0
+offset_right = 1505.0
+offset_bottom = 147.0
+text = "ESCAPE"
+
+[node name="CardButton" type="Button" parent="CanvasLayer/ActionBoard"]
+layout_mode = 0
+offset_left = 472.0
+offset_top = 26.0
+offset_right = 625.0
+offset_bottom = 147.0
+text = "CARDS"
+
+[node name="AttackButton" type="Button" parent="CanvasLayer/ActionBoard"]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 26.0
+offset_right = 318.0
+offset_bottom = 147.0
+text = "ATTACK"
+
+[node name="Object" type="Button" parent="CanvasLayer/ActionBoard"]
+layout_mode = 0
+offset_left = 783.0
+offset_top = 26.0
+offset_right = 932.0
+offset_bottom = 147.0
+text = "OBJECTS"
+
+[node name="Memories" type="Button" parent="CanvasLayer/ActionBoard"]
+layout_mode = 0
+offset_left = 1089.0
+offset_top = 26.0
+offset_right = 1239.0
+offset_bottom = 147.0
+text = "MEMORIES"
+
+[connection signal="pressed" from="CanvasLayer/ActionBoard/AttackButton" to="." method="_on_attack_button_pressed"]

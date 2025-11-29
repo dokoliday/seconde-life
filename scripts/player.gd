@@ -3,20 +3,24 @@ extends CharacterBody2D
 @onready var player_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
-@export var speed = 200 # How fast the player will move (pixels/sec).
-var screen_size # Size of the game window.
+@export var speed = 200
+
+var screen_size
 var player_blocked:bool =  false
+var current_level_name:String = "spring"
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	if get_tree().current_scene.name != 'Hub':
+		current_level_name = get_tree().current_scene.name
 
 func _process(delta):
 	var velocity = Vector2.ZERO
 	
-	move_and_slide()# The player's movement vector.
+	move_and_slide()
 	
 	if player_blocked:
-		player_sprite.animation = "stationary_spring"
+		player_sprite.animation = "stationary_front_" + current_level_name.to_lower()
 		player_sprite.play()
 		return
 		
@@ -35,16 +39,18 @@ func _process(delta):
 	position += velocity * delta
 	position = position.clamp(Vector2.ZERO, Vector2(screen_size.x+400,screen_size.y))
 	
-		# Gestion des animations (priorité : vertical > horizontal > stationnaire)
-	if velocity.y < 0:
-		player_sprite.animation = "walk_up_spring"
-	elif velocity.y > 0:
-		player_sprite.animation = "walk_down_spring"
-	elif velocity.x != 0:
-		player_sprite.animation = "walk_right_spring"
+	if velocity.x != 0:
+		player_sprite.animation = "walk_right_" + current_level_name.to_lower()
 		player_sprite.flip_h = velocity.x < 0
+	elif velocity.y < 0:
+		player_sprite.animation = "walk_up_" + current_level_name.to_lower()
+	elif velocity.y > 0:
+		player_sprite.animation = "walk_down_" + current_level_name.to_lower()
 	else:
-		player_sprite.animation = "stationary_spring"
+		if player_sprite.animation == "walk_up_" + current_level_name.to_lower() or player_sprite.animation == "stationary_back_" + current_level_name.to_lower() : 
+			player_sprite.animation = "stationary_back_" + current_level_name.to_lower()
+		else:
+			player_sprite.animation = "stationary_front_" + current_level_name.to_lower()
 		
 	player_sprite.play()
 	

@@ -5,7 +5,7 @@ extends CanvasLayer
 @onready var dialogs: CanvasLayer = $"."
 @onready var button: Button = $Button
 
-const DIALOG_MUM_SPRING = preload("uid://dhlk6fryj6snp")
+const DIALOG_MUM_SPRING = preload("uid://c8figji66hdun")
 
 var DIALOGS = {} # Utilise `load` au lieu de `preload` pour charger dynamiquement
 var index = 0  # Commence à 0 pour accéder au premier élément
@@ -13,7 +13,7 @@ var index = 0  # Commence à 0 pour accéder au premier élément
 signal dialog_started
 signal dialog_end
 
-func _ready() -> void:
+func display_dialog() -> void:
 	dialog_started.emit()
 	load_dialogs()
 	setImage()
@@ -50,4 +50,5 @@ func _on_button_pressed() -> void:
 		dialogs.hide()
 		dialog_end.emit()
 		button.disabled = true
+		
 	
