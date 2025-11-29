@@ -5,7 +5,8 @@ extends CanvasLayer
 @onready var dialogs: CanvasLayer = $"."
 @onready var button: Button = $Button
 
-const DIALOG_MUM_SPRING = preload("uid://c8figji66hdun")
+const DIALOG_MUM_SPRING = preload("uid://kacqgvl8lc1p")
+
 
 var DIALOGS = {} # Utilise `load` au lieu de `preload` pour charger dynamiquement
 var index = 0  # Commence à 0 pour accéder au premier élément

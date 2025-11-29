@@ -1,10 +1,10 @@
 [gd_scene load_steps=72 format=3 uid="uid://bscnao1jb0jgj"]
 
-[ext_resource type="Texture2D" uid="uid://dkuwvsby637lm" path="res://assets/blue_door.png" id="1_13jtl"]
+[ext_resource type="Texture2D" uid="uid://dc62rpu5bn8yx" path="res://assets/hub/blue_door.png" id="1_13jtl"]
 [ext_resource type="Script" uid="uid://bk2djceujt5l5" path="res://scripts/hub_doors.gd" id="1_aybgm"]
-[ext_resource type="Texture2D" uid="uid://bdm2t82cancrq" path="res://assets/gree_doort.png" id="2_aybgm"]
-[ext_resource type="Texture2D" uid="uid://u6frjl4je885" path="res://assets/orange_door.png" id="3_mi0jl"]
-[ext_resource type="Texture2D" uid="uid://bbrpcqimail56" path="res://assets/yellow_door.png" id="4_eoafi"]
+[ext_resource type="Texture2D" uid="uid://4kbpswnyj3gq" path="res://assets/hub/gree_doort.png" id="2_aybgm"]
+[ext_resource type="Texture2D" uid="uid://chwua1iu3m6fr" path="res://assets/hub/orange_door.png" id="3_mi0jl"]
+[ext_resource type="Texture2D" uid="uid://gvr3ncpo75a7" path="res://assets/hub/yellow_door.png" id="4_eoafi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aybgm"]
 atlas = ExtResource("1_13jtl")

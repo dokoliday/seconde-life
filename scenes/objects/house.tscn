@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://djogp3t43eoso"]
 
-[ext_resource type="Texture2D" uid="uid://duwg0bwqfnj1o" path="res://assets/house.png" id="1_st5h2"]
+[ext_resource type="Texture2D" uid="uid://c710powpwu6hc" path="res://assets/sheet/house.png" id="1_st5h2"]
 
 [node name="House" type="StaticBody2D"]
 

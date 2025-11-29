@@ -1,8 +1,8 @@
 [gd_scene load_steps=34 format=3 uid="uid://bm5xs0a32gha5"]
 
-[ext_resource type="Texture2D" uid="uid://drgffbwfqaocj" path="res://assets/death-Sheet.png" id="1_cps2h"]
+[ext_resource type="Texture2D" uid="uid://cigbked0lhvrg" path="res://assets/characters/death-Sheet.png" id="1_cps2h"]
 [ext_resource type="Script" uid="uid://3ww7knu878jg" path="res://scripts/death.gd" id="1_qmn47"]
-[ext_resource type="Texture2D" uid="uid://c3ejqvcxuhwtq" path="res://assets/death_fire-Sheet.png" id="3_cspd8"]
+[ext_resource type="Texture2D" uid="uid://bdbev6lcljduf" path="res://assets/characters/death_fire-Sheet.png" id="3_cspd8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a7v4n"]
 atlas = ExtResource("3_cspd8")
