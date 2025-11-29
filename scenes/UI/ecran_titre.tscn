@@ -1,0 +1,162 @@
+[gd_scene load_steps=16 format=3 uid="uid://d1scomni3pme1"]
+
+[ext_resource type="Script" uid="uid://c7l45hqljxeiq" path="res://scripts/ecran_titre.gd" id="1_eyn71"]
+[ext_resource type="Texture2D" uid="uid://l2wbiwq2mc4y" path="res://cover_opacity.png" id="1_t5ege"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyn71"]
+atlas = ExtResource("1_t5ege")
+region = Rect2(0, 0, 1600, 900)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ri3rk"]
+atlas = ExtResource("1_t5ege")
+region = Rect2(1600, 0, 1600, 900)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c407w"]
+atlas = ExtResource("1_t5ege")
+region = Rect2(3200, 0, 1600, 900)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l51vc"]
+atlas = ExtResource("1_t5ege")
+region = Rect2(4800, 0, 1600, 900)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nqk1"]
+atlas = ExtResource("1_t5ege")
+region = Rect2(6400, 0, 1600, 900)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lfjpx"]
+atlas = ExtResource("1_t5ege")
+region = Rect2(8000, 0, 1600, 900)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7lp7"]
+atlas = ExtResource("1_t5ege")
+region = Rect2(9600, 0, 1600, 900)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4airo"]
+atlas = ExtResource("1_t5ege")
+region = Rect2(11200, 0, 1600, 900)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbq1i"]
+atlas = ExtResource("1_t5ege")
+region = Rect2(12800, 0, 1600, 900)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ngc32"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyn71")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ri3rk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c407w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l51vc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nqk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lfjpx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7lp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4airo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbq1i")
+}],
+"loop": false,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="Animation" id="Animation_eyn71"]
+resource_name = "title"
+length = 7.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3, 5.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1000)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3, 5.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.3, 0.3)]
+}
+
+[sub_resource type="Animation" id="Animation_ri3rk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c407w"]
+_data = {
+&"RESET": SubResource("Animation_ri3rk"),
+&"title": SubResource("Animation_eyn71")
+}
+
+[node name="EcranTitre" type="Node2D"]
+script = ExtResource("1_eyn71")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1600.0
+offset_bottom = 900.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(800, 450)
+sprite_frames = SubResource("SpriteFrames_ngc32")
+autoplay = "default"
+frame = 8
+frame_progress = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_c407w")
+}
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

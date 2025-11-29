@@ -1,0 +1,16 @@
+{
+  "player": {
+	"health": 100,
+	"max_health": 100,
+	"defense": 0,
+	"items": [],
+	"season": "winter"
+  },
+
+  "enemy": {
+	"health": 200,
+	"max_health": 200,
+	"phase": 1,
+	"attacks": ["scythe_swing", "shadow_grasp"]
+  }
+}
