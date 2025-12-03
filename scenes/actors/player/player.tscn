@@ -277,7 +277,7 @@ script = ExtResource("1_g2els")
 position = Vector2(-13, -32)
 scale = Vector2(1.203125, 1.203125)
 sprite_frames = SubResource("SpriteFrames_qlg0r")
-animation = &"combat"
+animation = &"walk_right_winter"
 autoplay = "combat"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

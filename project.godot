@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SecondeLife"
-run/main_scene="uid://bwrt414m7nst2"
+run/main_scene="uid://d1scomni3pme1"
 config/features=PackedStringArray("4.5", "Forward Plus")
 run/canvas_textures/default_texture_filter=0
 

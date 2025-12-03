@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwd7vjmbfg8ix"
-path="res://.godot/imported/vege_tilset.png-1f3670f7823fefe65c7a25a472937a3e.ctex"
+uid="uid://dtjmlroj20ysy"
+path="res://.godot/imported/anim_splash_screen.png-3e64ec13af4db6b29fa4dfa817803537.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheet/vege_tilset.png"
-dest_files=["res://.godot/imported/vege_tilset.png-1f3670f7823fefe65c7a25a472937a3e.ctex"]
+source_file="res://assets/characters/anim_splash_screen.png"
+dest_files=["res://.godot/imported/anim_splash_screen.png-3e64ec13af4db6b29fa4dfa817803537.ctex"]
 
 [params]
 

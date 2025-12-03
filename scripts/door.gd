@@ -8,7 +8,7 @@ var door_actionnabled:bool = false
 var is_door_opened:bool =false
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_pressed("action") and door_actionnabled:
 		door_sprite.play('open')
 		action_icon.visible = false

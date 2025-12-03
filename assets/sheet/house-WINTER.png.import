@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwd7vjmbfg8ix"
-path="res://.godot/imported/vege_tilset.png-1f3670f7823fefe65c7a25a472937a3e.ctex"
+uid="uid://cn5dbtmvx5h5x"
+path="res://.godot/imported/house-WINTER.png-71afb8546c1dc2738e92f6e2435c40f0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheet/vege_tilset.png"
-dest_files=["res://.godot/imported/vege_tilset.png-1f3670f7823fefe65c7a25a472937a3e.ctex"]
+source_file="res://assets/sheet/house-WINTER.png"
+dest_files=["res://.godot/imported/house-WINTER.png-71afb8546c1dc2738e92f6e2435c40f0.ctex"]
 
 [params]
 

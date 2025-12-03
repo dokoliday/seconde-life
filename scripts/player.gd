@@ -11,12 +11,13 @@ var current_level_name:String = "spring"
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	if get_tree().current_scene.name != 'Hub':
+	if  get_tree().current_scene.name =='cine_intro':
+		current_level_name = 'winter'
+	elif get_tree().current_scene.name != 'Hub':
 		current_level_name = get_tree().current_scene.name
+	
 
 func _process(delta):
-	var velocity = Vector2.ZERO
-	
 	move_and_slide()
 	
 	if player_blocked:

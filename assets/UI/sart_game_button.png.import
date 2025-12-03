@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwd7vjmbfg8ix"
-path="res://.godot/imported/vege_tilset.png-1f3670f7823fefe65c7a25a472937a3e.ctex"
+uid="uid://bo1b4pwh00ysm"
+path="res://.godot/imported/sart_game_button.png-371fc3953a3c709d08bf3d2840932850.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheet/vege_tilset.png"
-dest_files=["res://.godot/imported/vege_tilset.png-1f3670f7823fefe65c7a25a472937a3e.ctex"]
+source_file="res://assets/UI/sart_game_button.png"
+dest_files=["res://.godot/imported/sart_game_button.png-371fc3953a3c709d08bf3d2840932850.ctex"]
 
 [params]
 
