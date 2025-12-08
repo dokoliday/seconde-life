@@ -1,5 +1,4 @@
-{
-  "dialog_spring": [
+[
 	{
 	  "text": "Bonjour, comment ça va ?",
 	  "char": "mum_spring",
@@ -16,4 +15,3 @@
 	  "season": "spring"
 	}
   ]
-}

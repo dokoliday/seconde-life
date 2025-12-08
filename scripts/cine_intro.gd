@@ -1,41 +1,59 @@
 extends Node2D
 
-@onready var house_sprite: Sprite2D = $House/Sprite2D
-@onready var player: CharacterBody2D = $Player
-@onready var spriteplayer: AnimatedSprite2D = $Player/AnimatedSprite2D
-@onready var door: AnimatedSprite2D = $Door
+#Objects and Characters
+@onready var house_sprite: Sprite2D =  $Objects/House/Sprite2D
+@onready var player: CharacterBody2D = $Characters/Player
+@onready var death: CharacterBody2D = $Characters/Death
+
+@onready var spriteplayer: AnimatedSprite2D =  $Characters/Player/AnimatedSprite2D
+@onready var door: AnimatedSprite2D = $Objects/Door
+@onready var letter_box: AnimatedSprite2D = $Objects/letter_box
+
+@onready var letter: ColorRect = $Letter
+
+#animation & camera
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var camera_2d_2: Camera2D = $Camera2D2
-@onready var letter_box: AnimatedSprite2D = $letter_box
-@onready var color_rect_2: ColorRect = $ColorRect2
-@onready var death: CharacterBody2D = $Death
-@onready var audio_effects: AudioStreamPlayer2D = $audioEffects
-@onready var music: AudioStreamPlayer2D = $music
+@onready var cinematique_camera: Camera2D = $Cinematique_camera
+
+#audio
+@onready var audio_effects: AudioStreamPlayer2D = $Audio/audioEffects
+@onready var music: AudioStreamPlayer2D = $Audio/music
 
 	
 var door_sound = preload("res://assets/sounds/open-door-1-14550.mp3")
-
 var winter_house_texture = preload("res://assets/sheet/house-WINTER.png")
-
+var music_theme = preload("res://assets/sounds/hebrew-nostalgia-385545.mp3")
+var walk_sound = preload("res://assets/sounds/sand-walk-106366.mp3")
 
 var player_anim: String = "stationary_front_winter"
 var current_anim: String = ""
 
+
 func _ready():
-	var music_theme = preload("res://assets/sounds/hebrew-nostalgia-385545.mp3")
-	music_theme.loop = true
 	house_sprite.texture = winter_house_texture
-	camera_2d_2.zoom = Vector2(1.7, 1.7)
-	camera_2d_2.limit_left = 0
+	
+	cinematique_camera.zoom = Vector2(1.7, 1.7)
+	cinematique_camera.limit_left = 0
+	animation_player.play("camera")
+	
+	music_theme.loop = true
+	walk_sound.loop = true
 	music.stream = music_theme
 	music.volume_db= -10
 	music.play()
-	animation_player.play("camera")
 
 func _process(_delta: float) -> void:
+	handle_anim()
+	handle_input()
+
+		
+func handle_anim():
 	if player_anim == 'pause':
 		spriteplayer.pause()
 	elif player_anim != current_anim:
+		if not  player_anim.contains('walk'):
+			audio_effects.stream = walk_sound
+			audio_effects.play()
 		if player_anim == 'walk_left_winter':
 			spriteplayer.flip_h = true
 			spriteplayer.play("walk_right_winter") 
@@ -43,8 +61,9 @@ func _process(_delta: float) -> void:
 			spriteplayer.flip_h = false
 			spriteplayer.play(player_anim)  
 			
-	if Input.is_action_pressed("action") and color_rect_2.visible == true :
-		color_rect_2.visible = false
+func handle_input():
+	if Input.is_action_pressed("action") and letter.visible == true :
+		letter.visible = false
 		play_player_anim("walk_right_winter")
 		animation_player.play()
 	
@@ -59,21 +78,19 @@ func play_player_anim(anim: String):
 func take_letter():
 	animation_player.pause()
 	letter_box.play()
-
-func _on_letter_box_animation_finished() -> void:
-	color_rect_2.visible = true
-	death.visible = true
 	
-func start_shake():
-	var tween = create_tween()
-	
+func start_shake() -> void:
+	var tween = create_tween().set_trans(Tween.TRANS_SINE)
+	var initial_offset = cinematique_camera.offset
 	for i in range(10):
 		var random_offset = Vector2(
 			randf_range(-1, 1) * 2,
 			randf_range(-1, 1) * 2
-			
-			)
-		tween.tween_property(camera_2d_2, "offset", random_offset, 0.2 / 20)
-		tween.tween_property(camera_2d_2, "offset", Vector2.ZERO, 0.2 / 5)
+		)
+		tween.tween_property(cinematique_camera, "offset", random_offset, 0.05)
+		tween.tween_property(cinematique_camera, "offset", initial_offset, 0.05)
 		
 	
+func _on_letter_box_animation_finished() -> void:
+	letter.visible = true
+	death.visible = true

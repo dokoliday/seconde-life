@@ -18,6 +18,7 @@ func _ready():
 	
 
 func _process(delta):
+	var velocity = Vector2.ZERO
 	move_and_slide()
 	
 	if player_blocked:

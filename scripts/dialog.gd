@@ -5,8 +5,6 @@ extends CanvasLayer
 @onready var dialogs: CanvasLayer = $"."
 @onready var button: Button = $Button
 
-const DIALOG_MUM_SPRING = preload("uid://kacqgvl8lc1p")
-
 
 var DIALOGS = {} # Utilise `load` au lieu de `preload` pour charger dynamiquement
 var index = 0  # Commence à 0 pour accéder au premier élément
@@ -14,18 +12,16 @@ var index = 0  # Commence à 0 pour accéder au premier élément
 signal dialog_started
 signal dialog_end
 
-func display_dialog() -> void:
+func display_dialog(path,texture) -> void:
 	dialog_started.emit()
-	load_dialogs()
-	setImage()
+	load_dialogs(path)
 	afficher_dialogue()
 
 
-func setImage() -> void:
-	texture_rect.texture = DIALOG_MUM_SPRING
 
-func load_dialogs() -> void:
-	var file = FileAccess.open("res://Json/dialogs.json", FileAccess.READ)
+
+func load_dialogs(path) -> void:
+	var file = FileAccess.open(path, FileAccess.READ)
 	if file:
 		var json = JSON.new()
 		var res = json.parse(file.get_as_text())
@@ -38,14 +34,12 @@ func load_dialogs() -> void:
 		print("Erreur : Impossible d'ouvrir le fichier dialogs.json")
 
 func afficher_dialogue() -> void:
-	if DIALOGS.has("dialog_spring"):
-		rich_text_label.text = DIALOGS["dialog_spring"][index]["text"]  # Accède au premier dialogue
-	else:
-		print("Erreur : La clé 'dialog_spring' n'existe pas dans le JSON.")
+	texture_rect.texture = DIALOGS[index]["texture"]  # 
+	rich_text_label.text = DIALOGS[index]["text"]  # Accède au premier dialogue
 		
 func _on_button_pressed() -> void:
 	index += 1
-	if index < DIALOGS["dialog_spring"].size():
+	if index < DIALOGS.size():
 		afficher_dialogue()
 	else:
 		dialogs.hide()
