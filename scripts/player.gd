@@ -15,10 +15,9 @@ func _ready():
 		current_level_name = 'winter'
 	elif get_tree().current_scene.name != 'Hub':
 		current_level_name = get_tree().current_scene.name
-	
 
 func _process(delta):
-	var velocity = Vector2.ZERO
+	velocity = Vector2.ZERO
 	move_and_slide()
 	
 	if player_blocked:

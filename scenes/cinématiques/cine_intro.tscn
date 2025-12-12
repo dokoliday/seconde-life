@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://bwmfkgokiqe8l"]
+[gd_scene load_steps=22 format=4 uid="uid://bwmfkgokiqe8l"]
 
 [ext_resource type="Texture2D" uid="uid://bwd7vjmbfg8ix" path="res://assets/sheet/vege_tilset.png" id="1_7e4yw"]
 [ext_resource type="Script" uid="uid://bjpifeyln6hhm" path="res://scripts/cine_intro.gd" id="1_rgg2d"]
@@ -103,6 +103,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(1022, 654)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FadeScreen:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.007843138, 0.007843138, 0.007843138, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_necsy"]
 resource_name = "camera"
@@ -126,7 +138,7 @@ tracks/1/path = NodePath("Characters/Player:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(10, 13.033334, 20, 20.5, 25.066668, 26.5),
+"times": PackedFloat32Array(8.2, 13.033334, 20, 20.5, 25.066668, 26.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(820, 572), Vector2(820, 691), Vector2(320, 691), Vector2(320, 691), Vector2(550, 691), Vector2(530, 691)]
@@ -138,8 +150,8 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(8, 10, 13.066667, 20, 20.5, 24.9, 26.566668),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(8, 8.233334, 13.066667, 20, 20.5, 24.9, 26.566668, 31.866667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"open_door"
@@ -161,6 +173,9 @@ tracks/2/keys = {
 }, {
 "args": ["pause"],
 "method": &"play_player_anim"
+}, {
+"args": [],
+"method": &"show_dialog"
 }]
 }
 tracks/3/type = "value"
@@ -176,10 +191,27 @@ tracks/3/keys = {
 "values": [Vector2(1022, 654), Vector2(570, 654)]
 }
 
+[sub_resource type="Animation" id="Animation_svlop"]
+resource_name = "fadeOut"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FadeScreen:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.10000001, 0.033333335, 1.9666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.007843138, 0.007843138, 0.007843138, 1), Color(0.007843138, 0.007843138, 0.007843138, 0), Color(0.007843138, 0.007843138, 0.007843138, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5l07b"]
 _data = {
 &"RESET": SubResource("Animation_e3qm6"),
-&"camera": SubResource("Animation_necsy")
+&"camera": SubResource("Animation_necsy"),
+&"fadeOut": SubResource("Animation_svlop")
 }
 
 [node name="Intro" type="Node2D"]
@@ -298,6 +330,7 @@ Hôpital Delafontaine
 tab_size = 3
 
 [node name="Dialogs" parent="." instance=ExtResource("11_svlop")]
+visible = false
 
 [node name="Audio" type="Node" parent="."]
 
@@ -305,4 +338,11 @@ tab_size = 3
 
 [node name="audioEffects" type="AudioStreamPlayer2D" parent="Audio"]
 
+[node name="FadeScreen" type="ColorRect" parent="."]
+z_index = 1
+offset_right = 1604.0
+offset_bottom = 898.0
+color = Color(0.007843138, 0.007843138, 0.007843138, 0)
+
 [connection signal="animation_finished" from="Objects/letter_box" to="." method="_on_letter_box_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -1,0 +1,31 @@
+[
+	{
+	  "text": "elle as enfin due arrivé",
+	  "texture": "uid://kacqgvl8lc1p",
+	},	{
+	  "text": "la lettre de X arriveras sans doute demain",
+	  "texture": "uid://kacqgvl8lc1p",
+	},	{
+	  "text": "il est temps Lucinda, nous devons y aller",
+	  "texture": "res://assets/characters/death_dialog_placeholder.png",
+	},	{
+	  "text": " qu'est ce que … qui est …",
+	  "texture": "uid://kacqgvl8lc1p",
+	},	{
+	  "text": "Tu le sait lucinda , hate toi",
+	  "texture":"res://assets/characters/death_dialog_placeholder.png",
+	},	{
+	  "text": "Non, la lettre … j attend sa lettre … je ne peux …",
+	  "texture": "uid://kacqgvl8lc1p",
+	},	{
+	  "text": "Lucinda , hate toi , ne me force pas a …",
+	  "texture":"res://assets/characters/death_dialog_placeholder.png",
+	},	{
+	  "text": "NON … pas maintenant … j attend sa lettre",
+	  "texture": "uid://kacqgvl8lc1p",
+	},
+		{
+	  "text": "Tres bien ….",
+	  "texture": "res://assets/characters/death_dialog_placeholder.png",
+	},
+  ]

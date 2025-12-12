@@ -19,6 +19,9 @@ extends Node2D
 @onready var audio_effects: AudioStreamPlayer2D = $Audio/audioEffects
 @onready var music: AudioStreamPlayer2D = $Audio/music
 
+#dialog
+@onready var dialogs: CanvasLayer = $Dialogs
+
 	
 var door_sound = preload("res://assets/sounds/open-door-1-14550.mp3")
 var winter_house_texture = preload("res://assets/sheet/house-WINTER.png")
@@ -27,7 +30,6 @@ var walk_sound = preload("res://assets/sounds/sand-walk-106366.mp3")
 
 var player_anim: String = "stationary_front_winter"
 var current_anim: String = ""
-
 
 func _ready():
 	house_sprite.texture = winter_house_texture
@@ -41,12 +43,15 @@ func _ready():
 	music.stream = music_theme
 	music.volume_db= -10
 	music.play()
-
+	
+	dialogs.button.pressed.connect(on_next_dialog)
+	dialogs.dialog_end.connect(fadeOut)
+	dialogs.display_dialog("res://Json/dialogs/cinematiques/intro.json")
+	
 func _process(_delta: float) -> void:
 	handle_anim()
 	handle_input()
-
-		
+	
 func handle_anim():
 	if player_anim == 'pause':
 		spriteplayer.pause()
@@ -64,13 +69,13 @@ func handle_anim():
 func handle_input():
 	if Input.is_action_pressed("action") and letter.visible == true :
 		letter.visible = false
-		play_player_anim("walk_right_winter")
-		animation_player.play()
+		show_dialog()
 	
 func open_door():
 	audio_effects.stream = door_sound
 	audio_effects.play()
 	door.play("open")
+	show_dialog()
 
 func play_player_anim(anim: String):
 	player_anim = anim
@@ -82,6 +87,7 @@ func take_letter():
 func start_shake() -> void:
 	var tween = create_tween().set_trans(Tween.TRANS_SINE)
 	var initial_offset = cinematique_camera.offset
+	
 	for i in range(10):
 		var random_offset = Vector2(
 			randf_range(-1, 1) * 2,
@@ -89,8 +95,33 @@ func start_shake() -> void:
 		)
 		tween.tween_property(cinematique_camera, "offset", random_offset, 0.05)
 		tween.tween_property(cinematique_camera, "offset", initial_offset, 0.05)
-		
+	
+	show_dialog()
 	
 func _on_letter_box_animation_finished() -> void:
 	letter.visible = true
 	death.visible = true
+	
+func on_next_dialog(): 
+	if dialogs.get_is_current_dialog_displayed_value() == false:
+		return
+	if dialogs.get_dialog_index() == 1 or dialogs.get_dialog_index() == 2 or dialogs.get_dialog_index() == 4 :
+		dialogs.hide_dialog(true)
+		if  dialogs.get_dialog_index() == 2:
+			play_player_anim("walk_right_winter")
+		animation_player.play()
+		
+func show_dialog():
+	play_player_anim('pause')
+	animation_player.pause()
+	audio_effects.stop()
+	dialogs.hide_dialog(false)
+
+
+func fadeOut():
+	animation_player.play("fadeOut")
+	
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == 'fadeOut':
+		get_tree().change_scene_to_file("res://scenes/levels/combat.tscn"
+	)
