@@ -71,7 +71,6 @@ func _on_timer_timeout() -> void:
 		display_char_length += 1
 		rich_text_label.text = current_full_text.substr(0, display_char_length)
 		audio_stream_player_2d.stream = letter_sound
-		audio_stream_player_2d.volume_db = -15
 		if(display_char_length % 2 == 0):
 			audio_stream_player_2d.play()
 	else:

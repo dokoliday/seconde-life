@@ -8,7 +8,6 @@ extends Node2D
 @onready var spriteplayer: AnimatedSprite2D =  $Characters/Player/AnimatedSprite2D
 @onready var door: AnimatedSprite2D = $Objects/Door
 @onready var letter_box: AnimatedSprite2D = $Objects/letter_box
-
 @onready var letter: ColorRect = $Letter
 
 #animation & camera
@@ -18,6 +17,7 @@ extends Node2D
 #audio
 @onready var audio_effects: AudioStreamPlayer2D = $Audio/audioEffects
 @onready var music: AudioStreamPlayer2D = $Audio/music
+@onready var walk_audio: AudioStreamPlayer2D = $Audio/walk_sound
 
 #dialog
 @onready var dialogs: CanvasLayer = $Dialogs
@@ -27,13 +27,13 @@ var door_sound = preload("res://assets/sounds/open-door-1-14550.mp3")
 var winter_house_texture = preload("res://assets/sheet/house-WINTER.png")
 var music_theme = preload("res://assets/sounds/hebrew-nostalgia-385545.mp3")
 var walk_sound = preload("res://assets/sounds/sand-walk-106366.mp3")
+var letter_sound = preload("res://assets/sounds/321108__nsstudios__page-turn.wav")
 
 var player_anim: String = "stationary_front_winter"
 var current_anim: String = ""
 
 func _ready():
 	house_sprite.texture = winter_house_texture
-	
 	cinematique_camera.zoom = Vector2(1.7, 1.7)
 	cinematique_camera.limit_left = 0
 	animation_player.play("camera")
@@ -41,7 +41,6 @@ func _ready():
 	music_theme.loop = true
 	walk_sound.loop = true
 	music.stream = music_theme
-	music.volume_db= -10
 	music.play()
 	
 	dialogs.button.pressed.connect(on_next_dialog)
@@ -53,12 +52,17 @@ func _process(_delta: float) -> void:
 	handle_input()
 	
 func handle_anim():
+	if not player_anim.contains('walk'):
+		walk_audio.stop()
+	
+	if player_anim.contains('walk') and walk_audio.playing:
+		walk_audio.volume_db = 20
+		walk_audio.stream = walk_sound
+		walk_audio.play()
+	
 	if player_anim == 'pause':
 		spriteplayer.pause()
 	elif player_anim != current_anim:
-		if not  player_anim.contains('walk'):
-			audio_effects.stream = walk_sound
-			audio_effects.play()
 		if player_anim == 'walk_left_winter':
 			spriteplayer.flip_h = true
 			spriteplayer.play("walk_right_winter") 
@@ -75,10 +79,14 @@ func open_door():
 	audio_effects.stream = door_sound
 	audio_effects.play()
 	door.play("open")
+
+	
+func _on_door_animation_finished() -> void:
 	show_dialog()
 
 func play_player_anim(anim: String):
 	player_anim = anim
+	
 		
 func take_letter():
 	animation_player.pause()
@@ -99,6 +107,8 @@ func start_shake() -> void:
 	show_dialog()
 	
 func _on_letter_box_animation_finished() -> void:
+	audio_effects.stream = letter_sound
+	audio_effects.play()
 	letter.visible = true
 	death.visible = true
 	

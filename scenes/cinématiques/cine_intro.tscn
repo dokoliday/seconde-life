@@ -150,7 +150,7 @@ tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(8, 8.233334, 13.066667, 20, 20.5, 24.9, 26.566668, 31.866667),
+"times": PackedFloat32Array(8, 9.433333, 13.066667, 20, 20.5, 24.9, 26.566668, 31.866667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
@@ -338,6 +338,8 @@ visible = false
 
 [node name="audioEffects" type="AudioStreamPlayer2D" parent="Audio"]
 
+[node name="walk_sound" type="AudioStreamPlayer2D" parent="Audio"]
+
 [node name="FadeScreen" type="ColorRect" parent="."]
 z_index = 1
 offset_right = 1604.0
@@ -345,4 +347,5 @@ offset_bottom = 898.0
 color = Color(0.007843138, 0.007843138, 0.007843138, 0)
 
 [connection signal="animation_finished" from="Objects/letter_box" to="." method="_on_letter_box_animation_finished"]
+[connection signal="animation_finished" from="Objects/Door" to="." method="_on_door_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
