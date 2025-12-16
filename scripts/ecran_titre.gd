@@ -8,12 +8,12 @@ extends Node2D
 @onready var dance_anim: AnimatedSprite2D = $dance_anim
 @onready var color_rect_2: ColorRect = $ColorRect2
 
-var letter_sound
-var button_sound
-var ambiance_sound
+var letter_sound: AudioStream
+var button_sound: AudioStream
+var ambiance_sound: AudioStream
 
 func _ready() -> void:
-	title_anim.scale=Vector2(0.5,0.5)
+	title_anim.scale = Vector2(0.5, 0.5)
 	animation_player.play("title")
 	letter_sound = preload("res://assets/sounds/letters_splash_screen.wav")
 	ambiance_sound = preload("res://assets/sounds/sacred-chant-spiritual-religious-choir-394914.mp3")
@@ -40,15 +40,20 @@ func _on_texture_button_button_up() -> void:
 	animation_player.play("fade_out")
 
 func _on_animated_sprite_2d_frame_changed() -> void:
-	if audio_stream_player_2d and title_anim.frame < 8:
+	if not audio_stream_player_2d:
+		return
+		
+	if title_anim.frame < 8:
 		audio_stream_player_2d.play()
-	elif audio_stream_player_2d and title_anim.frame >= 8:
-		ambiance_sound.loop = true
-		audio_stream_player_2d.stream = ambiance_sound
-		audio_stream_player_2d.volume_db= -80
-		audio_stream_player_2d.play()
-		var tween = create_tween()
-		tween.tween_property(audio_stream_player_2d,'volume_db',-10 ,4)
+	elif title_anim.frame >= 8:
+		# Set loop on the stream resource, not the preloaded resource
+		if ambiance_sound:
+			ambiance_sound.loop = true
+			audio_stream_player_2d.stream = ambiance_sound
+			audio_stream_player_2d.volume_db = -80
+			audio_stream_player_2d.play()
+			var tween = create_tween()
+			tween.tween_property(audio_stream_player_2d, "volume_db", -10, 4)
 
 func _on_dance_anim_animation_finished() -> void:
 	if dance_anim.animation == "init":
@@ -58,4 +63,4 @@ func _on_dance_anim_animation_finished() -> void:
 
 
 func _on_title_anim_animation_finished() -> void:
-	pass # Replace with function body.
+	pass
