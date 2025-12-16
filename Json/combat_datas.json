@@ -1,16 +1,16 @@
 {
-  "player": {
-	"health": 100,
-	"max_health": 100,
-	"defense": 0,
-	"items": [],
-	"season": "winter"
-  },
-
-  "enemy": {
-	"health": 200,
-	"max_health": 200,
-	"phase": 1,
-	"attacks": ["scythe_swing", "shadow_grasp"]
-  }
+	"characters": {
+		"player": {
+			"health": 100.0,
+			"max_health": 100.0
+		},
+		"death_1": {
+			"health": 2000.0,
+			"max_health": 2000.0,
+			"attacks": [
+				"scythe",
+				"memory_test"
+			]
+		}
+	}
 }

@@ -11,8 +11,8 @@ var DIALOGS = {}
 var index = 0
 var display_char_length = 0
 var current_full_text: String = ""
-var is_visible: bool
-var is_current_dialog_displayed:bool
+var dialog_visible: bool
+var is_current_dialog_displayed: bool
 
 var click_sound
 var letter_sound
@@ -21,9 +21,6 @@ const display_text_speed = 0.05
 signal dialog_started
 signal dialog_end
 
-
-
-
 func _ready() -> void:
 	button.pressed.connect(_on_button_pressed)
 	timer.paused = true
@@ -31,7 +28,7 @@ func _ready() -> void:
 	letter_sound = preload("res://assets/sounds/646124__voxlab__waldorf-m-bing-percussion.wav")
 
 func _process(_delta: float) -> void:
-	if is_visible == true and timer.paused == true:
+	if dialog_visible and timer.paused:
 		timer.paused = false
 	
 func display_dialog(path) -> void:
@@ -69,9 +66,10 @@ func afficher_dialogue() -> void:
 func _on_timer_timeout() -> void:
 	if display_char_length < current_full_text.length():
 		display_char_length += 1
+	
 		rich_text_label.text = current_full_text.substr(0, display_char_length)
 		audio_stream_player_2d.stream = letter_sound
-		if(display_char_length % 2 == 0):
+		if display_char_length % 2 == 0:
 			audio_stream_player_2d.play()
 	else:
 		is_current_dialog_displayed = true
@@ -101,18 +99,18 @@ func get_dialog_index() -> int:
 func get_is_current_dialog_displayed_value() -> bool:
 	return is_current_dialog_displayed
 	
-func hide_dialog(hide:bool):
-	if hide:
+func hide_dialog(should_hide: bool) -> void:
+	if should_hide:
 		timer.stop()
-		is_visible = false
+		dialog_visible = false
 		dialogs.visible = false
 		button.disabled = true
 	else:
 		is_current_dialog_displayed = false
 		button.disabled = false
-		rich_text_label.text = current_full_text.substr(0,0)
+		rich_text_label.text = ""  # Reset text to empty string
 		display_char_length = 0
-		timer.start(display_text_speed)  #
-		is_visible = true
+		timer.start(display_text_speed)
+		dialog_visible = true
 		dialogs.visible = true
 	

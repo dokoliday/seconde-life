@@ -28,7 +28,6 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		if body.name=="Player":
 			door_actionnabled = false
 			action_icon.visible = false
-			action_icon.visible = false
 			action_icon.stop()
 			
 

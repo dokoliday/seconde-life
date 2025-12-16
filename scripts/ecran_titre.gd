@@ -16,10 +16,8 @@ func _ready() -> void:
 	title_anim.scale=Vector2(0.5,0.5)
 	animation_player.play("title")
 	letter_sound = preload("res://assets/sounds/letters_splash_screen.wav")
-	button_sound = preload("res://assets/sounds/COMType_Machine a ecrire espace (ID 2843)_LS.wav")
 	ambiance_sound = preload("res://assets/sounds/sacred-chant-spiritual-religious-choir-394914.mp3")
 	button_sound = preload("res://assets/sounds/metal-hit-sound-effect-241374.mp3")
-	ambiance_sound.loop = true
 	
 	label.add_theme_font_override("font", load("res://assets/fonts/Valorant_Font.ttf"))
 	label.add_theme_color_override("font_color", Color(1, 1, 1))  # Blanc
@@ -45,6 +43,7 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 	if audio_stream_player_2d and title_anim.frame < 8:
 		audio_stream_player_2d.play()
 	elif audio_stream_player_2d and title_anim.frame >= 8:
+		ambiance_sound.loop = true
 		audio_stream_player_2d.stream = ambiance_sound
 		audio_stream_player_2d.volume_db= -80
 		audio_stream_player_2d.play()
