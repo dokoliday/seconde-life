@@ -4,23 +4,40 @@ extends Node2D
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var player_life: TextureProgressBar = $CanvasLayer/LifeBoard/PlayerLife
 @onready var death_life: TextureProgressBar = $CanvasLayer/LifeBoard/DeathLife
+@onready var v_box_container: VBoxContainer = $CanvasLayer/ActionBoard/AttacksButton/VBoxContainer
+@onready var player: AnimatedSprite2D = $Player
 
 # Constants
 const COMBAT_DATA_PATH = "res://Json/combat_datas.json"
 const SHAKE_INTENSITY = 12.0
 const SHAKE_DURATION = 0.2
 const SHAKE_ITERATIONS = 10
-const DAMAGE_PER_ATTACK = 20
+
 
 # Combat data
 var combat_data: Dictionary = {}
 var player_life_value: float = 0.0
 var death_life_value: float = 0.0
+var player_attacks_list: Array
+
+var ennemy_should_attack:bool = false
+var death_level = "death_1"
+
 
 func _ready() -> void:
 	death.flip_h = true
+	player.animation_finished.connect(_on_animation_finished)
 	load_combat_data()
 	initialize_life_bars()
+	
+
+func _process(_delta: float) -> void:
+	death_life.value = death_life_value
+	player_life.value = player_life_value
+	
+	if ennemy_should_attack:
+		ennemy_should_attack = false
+		ennemy_attack()
 
 func load_combat_data() -> void:
 	var file = FileAccess.open(COMBAT_DATA_PATH, FileAccess.READ)
@@ -33,6 +50,14 @@ func load_combat_data() -> void:
 			if "characters" in combat_data:
 				if "player" in combat_data.characters:
 					player_life_value = combat_data.characters.player.health
+					player_attacks_list = combat_data.characters.player.attacks
+					for player_attack in player_attacks_list :
+						var button = Button.new()
+						button.text = player_attack
+						if player_attack:
+							button.pressed.connect(_on_attack_button_pressed.bind(player_attack))
+						v_box_container.add_child(button)
+						
 				if "death_1" in combat_data.characters:
 					death_life_value = combat_data.characters.death_1.health
 		else:
@@ -66,13 +91,6 @@ func initialize_life_bars() -> void:
 		death_life.max_value = 2000.0
 		death_life.value = death_life_value
 
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("action"):
-		start_shake()
-	
-	# Update life bars
-	death_life.value = death_life_value
-	player_life.value = player_life_value
 
 func start_shake() -> void:
 	var tween = create_tween()
@@ -85,6 +103,43 @@ func start_shake() -> void:
 		tween.tween_property(camera_2d, "offset", random_offset, SHAKE_DURATION / 20)
 		tween.tween_property(camera_2d, "offset", Vector2.ZERO, SHAKE_DURATION / 5)
 
-func _on_attack_button_pressed() -> void:
+func _on_attacks_button_pressed() -> void:
+	v_box_container.visible = !v_box_container.visible
+
+func _on_attack_button_pressed(attackName:String):
+	player.play("attack_" + combat_data.attacks.player[attackName].animation)
+
+func _on_animation_finished() -> void:
+	var anim_name = player.animation
+	
+	if anim_name.begins_with("attack_"):
+		print("Animation d'attaque terminée : ", anim_name)
+		on_attack_finished(anim_name.replace("attack_",""))
+
+func on_death_attack_finished(attack_name):
 	start_shake()
-	death_life_value = max(0, death_life_value - DAMAGE_PER_ATTACK)
+	death.flip_h = true
+	player_life_value -= combat_data.attacks[death_level][attack_name].damage_full
+	death.play("stationnary_fight")
+	ennemy_should_attack = false
+	
+func on_attack_finished(attack_name):
+	start_shake()
+	death_life_value -= combat_data.attacks.player[attack_name].damage_full
+	player.play("stationnary_fight")
+	ennemy_should_attack = true
+
+func ennemy_attack() -> void:
+	var attack = combat_data.characters[death_level].attacks[0]
+	var attack_anim = combat_data.attacks[death_level][attack].animation
+	print(attack_anim)
+	death.flip_h = false
+	death.play("attack_" + attack_anim)
+	
+
+
+func _on_death_animation_finished() -> void:
+	var anim_name = death.animation
+	
+	if anim_name.begins_with("attack_"):
+		on_death_attack_finished(anim_name.replace("attack_",""))

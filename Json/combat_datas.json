@@ -1,16 +1,46 @@
 {
-	"characters": {
-		"player": {
-			"health": 100.0,
-			"max_health": 100.0
-		},
-		"death_1": {
-			"health": 2000.0,
-			"max_health": 2000.0,
-			"attacks": [
-				"scythe",
-				"memory_test"
-			]
+  "characters": {
+	"player": {
+	  "health": 100.0,
+	  "max_health": 100.0,
+	  "items": [
+		{
+		  "name": "memorine",
+		  "description": "Un médicament pour améliorer la mémoire.",
+		  "asset_path": "",
+		  "health_boost": 10.0,
+		  "quantity": 1
 		}
+	  ],
+	  "attacks": ["push"]
+	},
+	"death_1": {
+	  "health": 2000.0,
+	  "max_health": 2000.0,
+	  "attacks": ["scythe", "memory_test"]
 	}
+  },
+
+  "attacks": {
+	"player": {
+	  "push": {
+		"damage_full": 10.0,
+		"damage_break": 1.0,
+		"animation": "push"
+	  }
+	},
+	"death_1": {
+	  "scythe": {
+		"damage_full": 20.0,
+		"damage_break": 1.0,
+		"animation": "scythe"
+	  },
+
+	  "memory_test": {
+		"damage_full": 200.0,
+		"damage_break": 10.0,
+		"animation": "memory_test"
+	  }
+	}
+  }
 }

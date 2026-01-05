@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://4ligsl7htqs2"]
+[gd_scene load_steps=36 format=3 uid="uid://4ligsl7htqs2"]
 
 [ext_resource type="Script" uid="uid://dkuhspm1pjnod" path="res://scripts/combat.gd" id="1_f8fhw"]
+[ext_resource type="Texture2D" uid="uid://cgw1juxr2duxy" path="res://assets/attacks/attack_scythe.png" id="2_88l8t"]
 [ext_resource type="Texture2D" uid="uid://du64a0dmk4uav" path="res://assets/characters/combat-Sheet.png" id="2_f8fhw"]
-[ext_resource type="Texture2D" uid="uid://bdbev6lcljduf" path="res://assets/characters/death_fire-Sheet.png" id="2_raufl"]
 [ext_resource type="Texture2D" uid="uid://cigbked0lhvrg" path="res://assets/characters/death-Sheet.png" id="3_raufl"]
+[ext_resource type="Texture2D" uid="uid://cxbc7ot17px0m" path="res://assets/attacks/attack_push.png" id="4_o67b6"]
 [ext_resource type="Texture2D" uid="uid://ckirakpiblsgm" path="res://assets/UI/life_barre_emptyl.png" id="5_sj3cb"]
 [ext_resource type="Texture2D" uid="uid://yy2qvyysvrtq" path="res://assets/UI/life_barre_border.png" id="6_vk51m"]
 [ext_resource type="Texture2D" uid="uid://clh0t8me66hxs" path="res://assets/UI/life_barre_full.png" id="7_lxv1m"]
@@ -11,44 +12,57 @@
 [ext_resource type="Texture2D" uid="uid://bwafyyk8ka661" path="res://assets/UI/death_life_border.png" id="9_o67b6"]
 [ext_resource type="Texture2D" uid="uid://df26kvun3x364" path="res://assets/UI/death_life_full.png" id="10_tvnl7"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vk51m"]
-atlas = ExtResource("2_raufl")
-region = Rect2(0, 0, 64, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_o67b6"]
-atlas = ExtResource("2_raufl")
-region = Rect2(64, 0, 64, 64)
+atlas = ExtResource("2_88l8t")
+region = Rect2(0, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tvnl7"]
-atlas = ExtResource("2_raufl")
-region = Rect2(128, 0, 64, 64)
+atlas = ExtResource("2_88l8t")
+region = Rect2(96, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mgft0"]
-atlas = ExtResource("2_raufl")
-region = Rect2(192, 0, 64, 64)
+atlas = ExtResource("2_88l8t")
+region = Rect2(192, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vuvxn"]
-atlas = ExtResource("2_raufl")
-region = Rect2(256, 0, 64, 64)
+atlas = ExtResource("2_88l8t")
+region = Rect2(288, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y1ghl"]
-atlas = ExtResource("2_raufl")
-region = Rect2(320, 0, 64, 64)
+atlas = ExtResource("2_88l8t")
+region = Rect2(384, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i4ml6"]
-atlas = ExtResource("2_raufl")
-region = Rect2(384, 0, 64, 64)
+atlas = ExtResource("2_88l8t")
+region = Rect2(480, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y3uoq"]
-atlas = ExtResource("2_raufl")
-region = Rect2(448, 0, 64, 64)
+atlas = ExtResource("2_88l8t")
+region = Rect2(576, 0, 96, 96)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_jy67q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jy67q"]
+atlas = ExtResource("2_88l8t")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3beo"]
+atlas = ExtResource("2_88l8t")
+region = Rect2(768, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6yu1"]
+atlas = ExtResource("2_88l8t")
+region = Rect2(864, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_raufl"]
+atlas = ExtResource("3_raufl")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxv1m"]
+atlas = ExtResource("3_raufl")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o67b6"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vk51m")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o67b6")
 }, {
@@ -69,22 +83,20 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y3uoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jy67q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3beo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6yu1")
 }],
-"loop": true,
-"name": &"fire",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_raufl"]
-atlas = ExtResource("3_raufl")
-region = Rect2(704, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lxv1m"]
-atlas = ExtResource("3_raufl")
-region = Rect2(768, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_o67b6"]
-animations = [{
+"loop": false,
+"name": &"attack_scythe",
+"speed": 15.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_raufl")
@@ -93,9 +105,37 @@ animations = [{
 "texture": SubResource("AtlasTexture_lxv1m")
 }],
 "loop": true,
-"name": &"combat",
+"name": &"stationnary_fight",
 "speed": 3.0
 }]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8men"]
+atlas = ExtResource("4_o67b6")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8bni"]
+atlas = ExtResource("4_o67b6")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k8bk2"]
+atlas = ExtResource("4_o67b6")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33p3r"]
+atlas = ExtResource("4_o67b6")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_au5c4"]
+atlas = ExtResource("4_o67b6")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nr8ym"]
+atlas = ExtResource("4_o67b6")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ffmv"]
+atlas = ExtResource("4_o67b6")
+region = Rect2(576, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5vciv"]
 atlas = ExtResource("2_f8fhw")
@@ -113,6 +153,32 @@ region = Rect2(128, 0, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_s8men")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8bni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k8bk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33p3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_au5c4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nr8ym")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ffmv")
+}],
+"loop": false,
+"name": &"attack_push",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5vciv")
 }, {
 "duration": 1.0,
@@ -122,7 +188,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_sj3cb")
 }],
 "loop": true,
-"name": &"combat",
+"name": &"stationnary_fight",
 "speed": 3.0
 }]
 
@@ -131,27 +197,19 @@ script = ExtResource("1_f8fhw")
 
 [node name="Ennemy" type="Node2D" parent="."]
 
-[node name="Fire" type="AnimatedSprite2D" parent="Ennemy"]
-modulate = Color(1, 1, 1, 0.44705883)
-position = Vector2(1310, 417)
-scale = Vector2(11.40625, 11.6875)
-sprite_frames = SubResource("SpriteFrames_jy67q")
-animation = &"fire"
-autoplay = "fire"
-
 [node name="Death" type="AnimatedSprite2D" parent="Ennemy"]
 position = Vector2(1301, 478)
 scale = Vector2(7.875, 5.7968764)
 sprite_frames = SubResource("SpriteFrames_o67b6")
-animation = &"combat"
-autoplay = "combat"
+animation = &"attack_scythe"
+autoplay = "stationnary_fight"
 
 [node name="Player" type="AnimatedSprite2D" parent="."]
 position = Vector2(350, 508.00006)
 scale = Vector2(4.1093745, 3.675781)
 sprite_frames = SubResource("SpriteFrames_vk51m")
-animation = &"combat"
-autoplay = "combat"
+animation = &"stationnary_fight"
+autoplay = "stationnary_fight"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(800, 450)
@@ -211,13 +269,20 @@ offset_right = 625.0
 offset_bottom = 147.0
 text = "CARDS"
 
-[node name="AttackButton" type="Button" parent="CanvasLayer/ActionBoard"]
+[node name="AttacksButton" type="Button" parent="CanvasLayer/ActionBoard"]
 layout_mode = 0
 offset_left = 158.0
 offset_top = 26.0
 offset_right = 318.0
 offset_bottom = 147.0
 text = "ATTACK"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/ActionBoard/AttacksButton"]
+visible = false
+layout_mode = 0
+offset_left = 80.0
+offset_right = 240.0
+offset_bottom = 68.0
 
 [node name="Object" type="Button" parent="CanvasLayer/ActionBoard"]
 layout_mode = 0
@@ -235,4 +300,5 @@ offset_right = 1239.0
 offset_bottom = 147.0
 text = "MEMORIES"
 
-[connection signal="pressed" from="CanvasLayer/ActionBoard/AttackButton" to="." method="_on_attack_button_pressed"]
+[connection signal="animation_finished" from="Ennemy/Death" to="." method="_on_death_animation_finished"]
+[connection signal="pressed" from="CanvasLayer/ActionBoard/AttacksButton" to="." method="_on_attacks_button_pressed"]

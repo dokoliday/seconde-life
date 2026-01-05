@@ -5,6 +5,8 @@ extends CharacterBody2D
 var should_fight: bool = false
 signal start_fight
 
+
+
 func _process(_delta: float) -> void:
 	# Only check input when player is in range and action is just pressed (not held)
 	if Input.is_action_just_pressed("action") and should_fight:
