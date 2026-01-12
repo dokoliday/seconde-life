@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://xgl8h0j70cjq"]
+
+[ext_resource type="Script" uid="uid://byv88oliys266" path="res://scripts/damage_score.gd" id="1_1f1pr"]
+
+[node name="DamageScore" type="Node2D"]
+script = ExtResource("1_1f1pr")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 52.0
+offset_bottom = 23.0
+text = "20"

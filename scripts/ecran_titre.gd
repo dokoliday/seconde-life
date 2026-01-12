@@ -59,8 +59,3 @@ func _on_dance_anim_animation_finished() -> void:
 	if dance_anim.animation == "init":
 		dance_anim.play("loop")
 	
-	
-
-
-func _on_title_anim_animation_finished() -> void:
-	pass

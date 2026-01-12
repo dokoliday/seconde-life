@@ -56,6 +56,7 @@ offset_right = 464.0
 offset_bottom = 857.0
 size_flags_horizontal = 8
 size_flags_vertical = 4
+expand_mode = 2
 
 [node name="Button" type="Button" parent="."]
 offset_left = 1242.0

@@ -6,6 +6,7 @@ extends Node2D
 @onready var death_life: TextureProgressBar = $CanvasLayer/LifeBoard/DeathLife
 @onready var v_box_container: VBoxContainer = $CanvasLayer/ActionBoard/AttacksButton/VBoxContainer
 @onready var player: AnimatedSprite2D = $Player
+@onready var damage_popup_scene = preload("res://scenes/UI/damage_score.tscn")
 
 # Constants
 const COMBAT_DATA_PATH = "res://Json/combat_datas.json"
@@ -122,24 +123,31 @@ func on_death_attack_finished(attack_name):
 	player_life_value -= combat_data.attacks[death_level][attack_name].damage_full
 	death.play("stationnary_fight")
 	ennemy_should_attack = false
+	show_damage_popup(combat_data.attacks[death_level][attack_name].damage_full,player)
 	
 func on_attack_finished(attack_name):
 	start_shake()
 	death_life_value -= combat_data.attacks.player[attack_name].damage_full
 	player.play("stationnary_fight")
+	show_damage_popup(combat_data.attacks['player'][attack_name].damage_full,death)
+
 	ennemy_should_attack = true
 
 func ennemy_attack() -> void:
 	var attack = combat_data.characters[death_level].attacks[0]
 	var attack_anim = combat_data.attacks[death_level][attack].animation
-	print(attack_anim)
 	death.flip_h = false
 	death.play("attack_" + attack_anim)
-	
 
 
 func _on_death_animation_finished() -> void:
 	var anim_name = death.animation
-	
 	if anim_name.begins_with("attack_"):
 		on_death_attack_finished(anim_name.replace("attack_",""))
+
+func show_damage_popup(amount: int, hitBody: AnimatedSprite2D):
+	var popup = damage_popup_scene.instantiate()
+	get_parent().add_child(popup)  # Ajoute d'abord à l'arbre de scène
+	popup.position = hitBody.global_position
+	
+	popup.show_damage(amount, true)
