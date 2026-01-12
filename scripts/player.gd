@@ -36,10 +36,8 @@ func _get_level_name_from_scene() -> String:
 	return scene_name
 
 func _physics_process(_delta: float) -> void:
-	print('here')
+	#block player, during dialogs for exemple
 	if player_blocked:
-		print('blocked')
-		
 		velocity = Vector2.ZERO
 		player_sprite.animation = "stationary_front_" + current_level_name.to_lower()
 		player_sprite.play()

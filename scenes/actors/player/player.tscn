@@ -1,21 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://b5b0gwy6fdmkq"]
+[gd_scene load_steps=32 format=3 uid="uid://b5b0gwy6fdmkq"]
 
 [ext_resource type="Script" uid="uid://d2w8nb3pd5rf2" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://565uhaiae2d3" path="res://assets/characters/girl_spring-Sheet.png" id="2_oj104"]
-[ext_resource type="Texture2D" uid="uid://du64a0dmk4uav" path="res://assets/characters/combat-Sheet.png" id="2_yg5k4"]
 [ext_resource type="Texture2D" uid="uid://c305wma6lwnhi" path="res://assets/characters/winter_player.png" id="3_mpktj"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e5w6i"]
-atlas = ExtResource("2_yg5k4")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t1vny"]
-atlas = ExtResource("2_yg5k4")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0e3lr"]
-atlas = ExtResource("2_yg5k4")
-region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oj104"]
 atlas = ExtResource("2_oj104")
@@ -123,20 +110,6 @@ region = Rect2(960, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qlg0r"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e5w6i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t1vny")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0e3lr")
-}],
-"loop": true,
-"name": &"combat",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oj104")
@@ -276,8 +249,8 @@ script = ExtResource("1_g2els")
 position = Vector2(-13, -32)
 scale = Vector2(1.203125, 1.203125)
 sprite_frames = SubResource("SpriteFrames_qlg0r")
-animation = &"walk_right_winter"
-autoplay = "combat"
+animation = &"stationary_back_spring"
+frame_progress = 0.1412186
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-12.875, -7)

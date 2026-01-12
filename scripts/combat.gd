@@ -7,6 +7,8 @@ extends Node2D
 @onready var v_box_container: VBoxContainer = $CanvasLayer/ActionBoard/AttacksButton/VBoxContainer
 @onready var player: AnimatedSprite2D = $Player
 @onready var damage_popup_scene = preload("res://scenes/UI/damage_score.tscn")
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var fade_out_screen: ColorRect = $CanvasLayer/FadeOutScreen
 
 # Constants
 const COMBAT_DATA_PATH = "res://Json/combat_datas.json"
@@ -39,6 +41,8 @@ func _process(_delta: float) -> void:
 	if ennemy_should_attack:
 		ennemy_should_attack = false
 		ennemy_attack()
+	if player_life_value == 0:
+		fadeOut()
 
 func load_combat_data() -> void:
 	var file = FileAccess.open(COMBAT_DATA_PATH, FileAccess.READ)
@@ -114,7 +118,6 @@ func _on_animation_finished() -> void:
 	var anim_name = player.animation
 	
 	if anim_name.begins_with("attack_"):
-		print("Animation d'attaque terminée : ", anim_name)
 		on_attack_finished(anim_name.replace("attack_",""))
 
 func on_death_attack_finished(attack_name):
@@ -148,6 +151,14 @@ func _on_death_animation_finished() -> void:
 func show_damage_popup(amount: int, hitBody: AnimatedSprite2D):
 	var popup = damage_popup_scene.instantiate()
 	get_parent().add_child(popup)  # Ajoute d'abord à l'arbre de scène
-	popup.position = hitBody.global_position
-	
-	popup.show_damage(amount, true)
+	popup.position =Vector2(hitBody.global_position.x,hitBody.global_position.y-150)
+	popup.show_damage(amount)
+
+func fadeOut() -> void:
+	fade_out_screen.visible = true
+	animation_player.play("fade_out")
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "fade_out":
+		get_tree().change_scene_to_file("res://scenes/levels/hub.tscn")

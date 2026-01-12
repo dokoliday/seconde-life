@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://4ligsl7htqs2"]
+[gd_scene load_steps=39 format=3 uid="uid://4ligsl7htqs2"]
 
 [ext_resource type="Script" uid="uid://dkuhspm1pjnod" path="res://scripts/combat.gd" id="1_f8fhw"]
 [ext_resource type="Texture2D" uid="uid://cgw1juxr2duxy" path="res://assets/attacks/attack_scythe.png" id="2_88l8t"]
@@ -192,6 +192,42 @@ animations = [{
 "speed": 3.0
 }]
 
+[sub_resource type="Animation" id="Animation_o67b6"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadeOutScreen:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tvnl7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadeOutScreen:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mgft0"]
+_data = {
+&"RESET": SubResource("Animation_tvnl7"),
+&"fade_out": SubResource("Animation_o67b6")
+}
+
 [node name="Combat" type="Node2D"]
 script = ExtResource("1_f8fhw")
 
@@ -208,7 +244,7 @@ autoplay = "stationnary_fight"
 position = Vector2(350, 508.00006)
 scale = Vector2(4.1093745, 3.675781)
 sprite_frames = SubResource("SpriteFrames_vk51m")
-animation = &"stationnary_fight"
+animation = &"attack_push"
 autoplay = "stationnary_fight"
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -300,5 +336,17 @@ offset_right = 1239.0
 offset_bottom = 147.0
 text = "MEMORIES"
 
+[node name="FadeOutScreen" type="ColorRect" parent="CanvasLayer"]
+visible = false
+offset_right = 1600.0
+offset_bottom = 896.0
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mgft0")
+}
+
 [connection signal="animation_finished" from="Ennemy/Death" to="." method="_on_death_animation_finished"]
 [connection signal="pressed" from="CanvasLayer/ActionBoard/AttacksButton" to="." method="_on_attacks_button_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
